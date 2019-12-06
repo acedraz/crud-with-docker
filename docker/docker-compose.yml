@@ -24,9 +24,9 @@ services:
     environment:
       - MYSQL_USER=root
       - MYSQL_PASS=123
-      - MYSQL_DSN=mysql:host=mysql;dbname=webjump
+      - MYSQL_DSN=mysql:host=mysql;dbname=webjump.php
       - MYSQL_HOST=mysql
-      - MYSQL_DBNAME=webjump
+      - MYSQL_DBNAME=webjump.php
 
   # Data persistence service layer
   mysql:

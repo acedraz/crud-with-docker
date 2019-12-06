@@ -21,8 +21,6 @@ class ProductController
         $_POST['category'] = json_encode($_POST['category']);
         $_POST['image'] = basename($_FILES["image"]["name"]);
         $product->setData($_POST);
-//        var_dump($product);
-//        die();
         $select = $product->select("SELECT * FROM product WHERE sku = :SKU", array(
             ":SKU" => $product->getData('sku'),
         ));
@@ -60,7 +58,6 @@ class ProductController
         }
         $data['category'] = json_encode($data['category']);
         $product->setData($data);
-//        var_dump($product);
         $product->query("UPDATE product set sku=:sku, name=:name, price=:price, qty=:qty, category=:category, description=:description, image=:image where id=:id", array(
             ":sku" => $product->getData('sku'),
             ":name" => $product->getData('name'),
