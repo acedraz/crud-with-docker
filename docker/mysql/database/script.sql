@@ -18,13 +18,15 @@ CREATE TABLE `product` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL DEFAULT '',
   `sku` int(11) NOT NULL,
-  `price` decimal(10,2) NOT NULL DEFAULT '' ,
+  `price` decimal(10,2) NOT NULL DEFAULT 0,
   `description` varchar(200) NOT NULL DEFAULT '',
   `qty` int(11) NOT NULL,
   `category` json DEFAULT NULL,
   `image` varchar(200) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `category`;
 
 CREATE TABLE `category` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
