@@ -17,12 +17,12 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL DEFAULT '',
-  `sku` int(11) NOT NULL,
+  `sku` varchar(200) NOT NULL,
   `price` decimal(10,2) NOT NULL DEFAULT 0,
   `description` varchar(200) NOT NULL DEFAULT '',
   `qty` int(11) NOT NULL,
   `category` json DEFAULT NULL,
-  `image` varchar(200) NOT NULL DEFAULT '',
+  `image` varchar(200) DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

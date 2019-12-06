@@ -19,7 +19,12 @@ class ProductController
     {
         $product = new Product();
         $_POST['category'] = json_encode($_POST['category']);
-        $_POST['image'] = basename($_FILES["image"]["name"]);
+        if ($_FILES["image"]["name"]) {
+            $_POST['image'] = basename($_FILES["image"]["name"]);
+            $target_dir = Product::PRODUCT_MEDIA_PATH;
+            $target_file = $target_dir . basename($_FILES["image"]["name"]);
+            move_uploaded_file( $_FILES['image']['tmp_name'],$target_file);
+        }
         $product->setData($_POST);
         $select = $product->select("SELECT * FROM product WHERE sku = :SKU", array(
             ":SKU" => $product->getData('sku'),
@@ -29,10 +34,6 @@ class ProductController
             exit;
         }
         $product->save();
-        $target_dir = Product::PRODUCT_MEDIA_PATH;
-        $target_file = $target_dir . basename($_FILES["image"]["name"]);
-        move_uploaded_file( $_FILES['image']['tmp_name'],$target_file);
-
     }
 
     /**
