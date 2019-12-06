@@ -74,12 +74,17 @@ $actions = $ActionsObject->getActions();
 
                 <td class="data-grid-td">
                     <span class="data-grid-cell-content">
-                    <?php foreach (json_decode($product['category']) as $categoryId): ?>
-                        <?php
-                            $categoryObject->loadById((int)$categoryId);
+                    <?php foreach (json_decode($product['category']) as $category): ?>
+                        <?php if (is_numeric($category)) : ?>
+                            <?php
+                            $categoryObject->loadById((int)$category);
                             echo $categoryObject->getData('name');
-                        ?>
-                        <Br />
+                            ?>
+                            <Br />
+                        <?php else : ?>
+                            <?php echo $category; ?>
+                            <Br />
+                        <?php endif; ?>
                     <?php endforeach; ?>
                     </span>
                 </td>

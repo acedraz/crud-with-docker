@@ -22,7 +22,7 @@ while (($column = fgetcsv($file, 10000, ";")) !== FALSE) {
         "qty" => $column[3],
         "price" => $column[4],
         "category" => explode('|',$column[5]),
-        "image" => 'vaalue'
+        "image" => ''
     );
     $product = new Product();
     $data['category'] = json_encode($data['category']);
@@ -30,9 +30,8 @@ while (($column = fgetcsv($file, 10000, ";")) !== FALSE) {
     $select = $product->select("SELECT * FROM product WHERE sku = :SKU", array(
         ":SKU" => $product->getData('sku'),
     ));
-    if ($select) {
-        exit;
+    if (!$select) {
+        $product->save();
     }
-    $product->save();
 }
 ?>
