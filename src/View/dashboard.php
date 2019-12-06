@@ -25,7 +25,11 @@ $products = $productObject->all();
                 </div>
                 <div class="product-info">
                     <div class="product-name"><span><?php echo $product['name']; ?></span></div>
-                    <div class="product-price"><span class="special-price"><?php echo $product['qty']; ?> available</span> <span>R$<?php echo $product['price']; ?></span></div>
+                    <div class="product-price">
+                        <span class="special-price">
+                            <?= ($product['qty'] > 0) ? $product['qty']." available" : "Out of stock" ?>
+                        </span>
+                        <span>R$<?php echo str_replace(".",",", $product['price']); ?></span></div>
                 </div>
             </li>
         <?php

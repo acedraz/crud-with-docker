@@ -51,12 +51,24 @@ class ProductController
     {
         $product = new Product();
         $product->loadById($data['_edit']);
-
+        $data['image'] = $product->getData('image');
+        if ($_FILES["image"]["name"]) {
+            $data['image'] = basename($_FILES["image"]["name"]);
+            $target_dir = Product::PRODUCT_MEDIA_PATH;
+            $target_file = $target_dir . basename($_FILES["image"]["name"]);
+            move_uploaded_file( $_FILES['image']['tmp_name'],$target_file);
+        }
+        $data['category'] = json_encode($data['category']);
         $product->setData($data);
-
-        $product->query("UPDATE category set name=:name, code=:code where id=:id", array(
+//        var_dump($product);
+        $product->query("UPDATE product set sku=:sku, name=:name, price=:price, qty=:qty, category=:category, description=:description, image=:image where id=:id", array(
+            ":sku" => $product->getData('sku'),
             ":name" => $product->getData('name'),
-            ":code" => $product->getData('code'),
+            ":price" => $product->getData('price'),
+            ":qty" => $product->getData('qty'),
+            ":category" => $product->getData('category'),
+            ":description" => $product->getData('description'),
+            ":image" => $product->getData('image'),
             ":id" => $product->getData('id'),
         ));
     }
